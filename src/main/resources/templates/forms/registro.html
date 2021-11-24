@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<script src="JAVASCRIPT/ajax.js" type="text/javascript"></script>
+<script language="javascript1.2">
+	function validar(e) {
+		tecla = (document.all) ? e.keyCode : e.which;
+
+		if ((tecla == null) || (tecla == 0) || (tecla == 8) || (tecla == 9) || (tecla == 13) || (tecla == 27))
+			return true; //Tecla de retroceso (para poder borrar)
+		patron = /\d/; //Solo acepta n�meros
+		te = String.fromCharCode(tecla);
+		return patron.test(te);
+	}
+
+	// 20/09/2010. Reconocer si un e-mail es correcto o no.  
+	function validamail(txt) {
+
+		//expresion regular  
+		var b = /^[^@\s]+@[^@\.\s]+(\.[^@\.\s]+)+$/
+		//comentar la siguiente linea si no se desea que aparezca el alert()  
+		//alert("Email " + (b.test(txt)?"":"no ") + "v�lido.")  
+		//devuelve verdadero si validacion OK, y falso en caso contrario  
+		return b.test(txt)
+	}
+	///////////
+	
+
+	/////////////////////////////////////////////////////////////////////////////////////
+	function guardar() {
+		//var usuario         = document.getElementById("usuario").value;
+		var tipodoc = document.getElementById("login_tipo_doc").value;
+		var identificacion = document.getElementById("cedula").value;
+		var clave = document.getElementById("clave").value;
+		var clave2 = document.getElementById("clave2").value;
+		var correo = document.getElementById("correo").value;
+		var correo2 = document.getElementById("correo2").value;
+		verificamail = validamail(correo);
+		var nombre = document.getElementById("nombres").value;
+		var apellido = document.getElementById("apellidos").value;
+		var genero = document.getElementById("genero").value;
+		var fechanac = document.getElementById("fechanac").value;		
+		var nacionalidad = document.getElementById("nacionalidad").value;
+		var pais_res = document.getElementById("pais_res").value;
+		var ciudad_res = document.getElementById("ciudad_res").value;
+		var matricula = document.getElementById("matricula").value;
+		var pais_notificacion = document.getElementById("pais_notificacion").value;
+		var ciudad_notificacion = document.getElementById("ciudad_notificacion").value;
+		var dir_notificacion = document.getElementById("dir_notificacion").value;
+		var tel_fijo = document.getElementById("tel_fijo").value;
+		var cel = document.getElementById("cel").value;
+
+		if (isNaN(identificacion) || identificacion.trim() == '' || identificacion.length <= 4) {
+			alert('Por favor ingrese un n\u00famero de identificaci\u00f3n v\u00e1lido y mayor de 4 caracteres.');
+			login.cedula.focus();
+		} else if (clave == '') {
+			alert('Por favor ingrese una contrase\u00f1a.');
+			login.clave.focus();
+		} else if (clave2 == '') {
+			alert('Por favor repita la contrase\u00f1a.');
+			login.clave2.focus();
+		} else if (clave != clave2) {
+			alert('Por favor repita la contrase\u00f1a.');
+			login.clave2.focus();
+		} else if (verificamail == false) {
+			alert('Por favor ingrese un correo v\u00e1lido.');
+			login.correo.focus();
+		} else if (correo != correo2) {
+			alert('los correos deben ser iguales');
+			login.correo.focus();
+		} else if (nombre.trim() == '') {
+			alert('Por favor digite el nombre');
+			login.nombres.focus();
+		} else if (apellido.trim() == '') {
+			alert('Por favor ingrese un apellido.');
+			login.apellidos.focus();
+		} else if (genero == '-') {
+			alert('Seleccione el genero correspondiente');
+			login.genero.focus();
+		}else if (nacionalidad.trim() == '') {
+			alert('Por favor ingrese la nacionalidad.');
+			login.nacionalidad.focus();
+		} else if (pais_res.trim() == '') {
+			alert('Escriba el pa\u00eds de residencia.');
+			login.pais_res.focus();
+		} else if (ciudad_res.trim() == '') {
+			alert('Por favor ingrese la ciudad de residencia.');
+			login.ciudad_res.focus();
+		} else if (pais_notificacion.trim() == '') {
+			alert('Escriba el pa\u00eds de notificaci\u00f3n.');
+			login.pais_notificacion.focus();
+		} else if (ciudad_notificacion.trim() == '') {
+			alert('Por favor ingrese la ciudad de notificaci\u00f3n.');
+			login.ciudad_notificacion.focus();
+		} else if (dir_notificacion.trim() == '') {
+			alert('Escriba la direci\u00f3n de notificaci\u00f3n.');
+			login.dir_notificacion.focus();
+		} else if (isNaN(tel_fijo) || tel_fijo.trim() == '') {
+			alert('Por favor ingrese un n\u00famero de tel\u00e9fono fijo v\u00e1lido.');
+			login.tel_fijo.focus();
+		} else if (isNaN(cel) || cel.trim() == '') {
+			alert('Por favor ingrese un n\u00famero de tel\u00e9fono celular v\u00e1lido.');
+			login.cel.focus();
+		} else if (!document.getElementById("autorizacion").checked) {
+			alert("Debe aceptar los Terminos de Uso.");
+			event.preventDefault();
+		} else {
+			document.login.submit();
+
+		}
+	} //cierra la funcion      
+</script>
+
+
+</head>
+
+<body>
+	<form action="" method="post" name="registro" id="registro">
+
+		<table>
+			<caption>
+				<h2>REGISTRO DE NUEVO ASPIRANTE</h2>
+			</caption>
+			<tr>
+				<th colspan="2" >
+					<p align='left'><span>El registro en el Banco de Hojas de Vida consta de dos pasos:</span></p>
+					<p align='justify'>Paso 1. <B>Registro de usuario:</B> consiste en crear su usuario en la plataforma del Banco de Hojas de Vida.<span></span></p>
+					<p align='justify'>Paso 2.<B> Diligenciamiento del formulario digital:</B> consiste en registrar la informaci&oacute;n que corresponde a su hoja de vida.</p>
+					<p align='justify'>Completando los dos pasos del registro se habilita para participar en la convocatoria permanente del Banco de Hojas de Vida.</p>
+					<br>
+					<p align='left'><B>Paso 1.</B></p>
+				</th>
+			</tr>
+			<tr height='33px'>
+				<td>Tipo de Documento:</td>
+				<td><select name="login_tipo_doc" id="login_tipo_doc" required="required">
+						<option value="CC">C&eacute;dula de Ciudadan&iacute;a</option>
+						<option value="PAS">Pasaporte</option>
+						<option value="CE">C&eacute;dula de extranjer&iacute;a</option>
+					</select> </td>
+			</tr>
+			<tr height='33px'>
+				<td>N&uacute;mero de Documento:</td>
+				<td><input name="cedula" type="text" id="cedula" onKeyPress="return validar(event)" maxlength="20" required="required" placeholder="Solo Digitos" />&nbsp;</td>
+			</tr>
+			<tr height='33px'>
+				<td>Contrase&ntilde;a:</td>
+				<td><input name="clave" type="password" id="clave" required="required" />&nbsp;</td>
+			</tr>
+			<tr height='33px'>
+				<td>Confirmar Contrase&ntilde;a:&nbsp;</td>
+				<td><input name="clave2" type="password" id="clave2" required="required" />&nbsp;</td>
+			</tr>
+			<tr height='33px'>
+				<td>Correo Electr&oacute;nico </td>
+				<td><input name="correo" type="text" id="correo" size="50" maxlength="60" onSelect="this.value=''" required="required" placeholder="Correo V&aacute;lido" />&nbsp;</td>
+			</tr>
+			<tr height='33px'>
+				<td>Confirmar Correo Electr&oacute;nico </td>
+				<td><input name="correo2" type="text" id="correo2" size="50" maxlength="60" onSelect="this.value=''" required="required" placeholder="Correo V&aacute;lido" />&nbsp;</td>
+			</tr>
+			<!--/table-->
+			<!-- *****************************   -->
+			<!--table id="tablacuerpo" class="tablalogin" align="center" border="0">
+    <caption>Informaci&oacute;n personal</caption-->
+			<tr height='33px'>
+				<td width="16%">Nombres:</td>
+				<td width="18%"> <input onblur="javasript:this.value=this.value.toUpperCase();" name="nombres" type="text" class="text" id="nombres" value="" required="required" placeholder="Su Nombre" /> </td>
+			</tr>
+			<tr height='33px'>
+				<td width="25%">Apellidos:</td>
+				<td width="18%"> <input onblur="javasript:this.value=this.value.toUpperCase();" name="apellidos" type="text" class="text" id="apellidos" value="" required="required" placeholder="Su Apellido" /> </td>
+			</tr>
+			<tr height='33px'>
+				<td>G&eacute;nero:</td>
+				<td>
+
+					<select name="genero" class="text" id="genero">
+						<option value="-">-</option>
+						<option value="M">Masculino</option>
+						<option value="F">Femenino</option>
+					</select>
+				</td>
+			</tr>
+			<tr height='33px'>
+				<td>Fecha de nacimiento (DD/MM/AAAA):</td>
+				<td>
+					<input type="date" name="fechanac" id="fechanac">
+                </td>
+
+			</tr>
+			<tr height='33px'>
+				<td>Nacionalidad:</td>
+				<td> <input onblur="javasript:this.value=this.value.toUpperCase();" name="nacionalidad" type="text" class="text" id="nacionalidad" value="" required="required" placeholder="COLOMBIA si es Colombiano" /> </td>
+			</tr>
+			<tr height='33px'>
+				<td>Pa&iacute;s de residencia:</td>
+				<td> <input onblur="javasript:this.value=this.value.toUpperCase();" name="pais_res" type="text" class="text" id="pais_res" value="" required="required" placeholder="COLOMBIA si es Colombiano" /> </td>
+			</tr>
+			<tr height='33px'>
+				<td>Ciudad de residencia:</td>
+				<td> <input onblur="javasript:this.value=this.value.toUpperCase();" name="ciudad_res" type="text" class="text" id="ciudad_res" value="" required="required" placeholder="municipio o Ciudad" /> </td>
+			</tr>
+			<tr height='33px'>
+				<td>Matr&iacute;cula profesional:</td>
+				<td> <input onblur="javasript:this.value=this.value.toUpperCase();" name="matricula" type="text" class="text" id="matricula" value="" required="required" placeholder="N&uacute;mero de Matricula" /> </td>
+			</tr>
+			<tr height='33px'>
+				<td>Pa&iacute;s de notificaci&oacute;n:</td>
+				<td> <input onblur="javasript:this.value=this.value.toUpperCase();" name="pais_notificacion" type="text" class="text" id="pais_notificacion" value="" required="required" placeholder="COLOMBIA si es Colombiano" /> </td>
+			</tr>
+			<tr height='33px'>
+				<td>Ciudad de notificaci&oacute;n:</td>
+				<td> <input onblur="javasript:this.value=this.value.toUpperCase();" name="ciudad_notificacion" type="text" class="text" id="ciudad_notificacion" value="" required="required" placeholder="Su municipio o Ciudad" /> </td>
+			</tr>
+			<tr height='33px'>
+				<td>Direcci&oacute;n de notificaci&oacute;n:</td>
+				<td> <input onblur="javasript:this.value=this.value.toUpperCase();" name="dir_notificacion" type="text" class="text" id="dir_notificacion" value="" required="required" size='60' placeholder="Direcci&oacute;n V&aacute;lida" /> </td>
+			</tr>
+			<tr height='33px'>
+				<td>Tel&eacute;fono fijo:</td>
+				<td><input onblur="javasript:this.value=this.value.toUpperCase();" name="tel_fijo" type="text" class="text" id="tel_fijo" value="" required="required" placeholder="Solo Digitos" />&nbsp;</td>
+			</tr>
+			<tr height='33px'>
+				<td>Celular o m&oacute;vil:</td>
+				<td> <input onblur="javasript:this.value=this.value.toUpperCase();" name="cel" type="text" class="text" id="cel" value="" required="required" placeholder="Solo Digitos" />&nbsp;</td>
+			</tr>
+		</table>
+
+		<div style="border-bottom:none;">
+			<label>
+				<strong>Sus datos personales se tratar&aacute;n conforme a nuestra Pol&iacute;tica de Tratamiento de Datos Personales.
+					Para mayor informaci&oacute;n podr&aacute; consultar nuestra pol&iacute;tica en la p&aacute;gina web: <a href='#">Pol&iacute;tica de Privacidad</a></strong><br>
+				<br><strong> Aceptaci&oacute;n del tratamiento de los Datos Personales *</strong>
+			</label>
+
+			<table border='0'>
+				<tr>
+					<td style="width:9%;" align='center'>
+						<div id="autorizacion_text" class="ctrlHolder shadow-white"><label><strong>* <em>Presione para Aceptar.</em> </strong><br><input type="checkbox" id="autorizacion" name="autorizacion" value="SI" style="width: 13px;" /></div>
+					</td>
+					<td style="width:91%;" align="justify">
+						Ley de Protecc&oacute;n de Datos Personales: La autorizaci&oacute;n suministrada en el presente formulario faculta a la Vicerrector&iacute;a de Docencia para que d&eacute; a sus datos aqu&iacute; recopilados el tratamiento se&ntilde;alado en la &quot;Pol&iacute;tica de Privacidad para el Tratamiento de Datos Personales&quot;.<br>
+					</td>
+				</tr>
+			</table>
+		</div>
+
+		<br>
+		<div align="center"><span class="style1">Estimado aspirante: Antes de registrarse, por favor verifique que las claves ingresadas coincidan al igual que con los correos ingresados. Recuerde que son de gran importancia para su registro satisfactorio.</span></div>
+		<br>
+
+		<table width="75%" border="0" align="center">
+			<tr>
+				<td align="center"><input name="enviar" type="button" class="navLink" id="enviar" value="Paso 2" onClick="guardar();">
+					&nbsp;&nbsp;&nbsp;&nbsp;
+					<!--input name="enviar2" type="button" class="navLink" id="enviar2" value="Paso 2" onClick="window.location='login.php';"-->
+				</td>
+			</tr>
+			<tr>
+				<td align="center" id="oculto">
+					
+				</td>
+			</tr>
+		</table>
+	</form>
+</body>
+
+</html>
