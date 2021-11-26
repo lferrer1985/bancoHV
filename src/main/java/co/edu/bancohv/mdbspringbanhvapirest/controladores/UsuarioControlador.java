@@ -3,6 +3,7 @@ package co.edu.bancohv.mdbspringbanhvapirest.controladores;
 
 
 import java.util.ArrayList;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -44,6 +45,16 @@ public class UsuarioControlador {
             return "Error eliminando el cliente";
         }
         
+    }
+
+    @GetMapping(path = "/nombre/{nombre}")
+    public List<UsuarioModelo> clientePorNombre(@PathVariable("nombre") String nombre){
+        return this.clienteServicio.obtenerClientePorNombre(nombre);
+    }
+
+    @GetMapping(path = "/apellido/{apellido}")
+    public List<UsuarioModelo> ClientePorApellido(@PathVariable("apellido") String apellido){
+        return clienteServicio.obtenerPorApellido(apellido);
     }
     
 }

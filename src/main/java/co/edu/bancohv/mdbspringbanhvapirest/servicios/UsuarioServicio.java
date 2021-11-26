@@ -1,6 +1,7 @@
 package co.edu.bancohv.mdbspringbanhvapirest.servicios;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -31,6 +32,14 @@ public class UsuarioServicio {
             return false;
         }
 
+    }
+
+    public List<UsuarioModelo> obtenerClientePorNombre(String nombre){
+        return clienteRepository.findByNombre(nombre);
+    }
+    
+    public List<UsuarioModelo> obtenerPorApellido(String apellido){
+        return clienteRepository.BuscarPorApellido(apellido);
     }
     
 }
