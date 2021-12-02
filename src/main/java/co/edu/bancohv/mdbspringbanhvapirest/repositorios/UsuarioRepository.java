@@ -2,6 +2,9 @@ package co.edu.bancohv.mdbspringbanhvapirest.repositorios;
 
 import java.util.List;
 
+
+
+import org.springframework.data.mongodb.core.query.Update;
 import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.data.mongodb.repository.Query;
 
@@ -13,4 +16,6 @@ public interface UsuarioRepository extends MongoRepository<UsuarioModelo,String>
     
     @Query("{apellido:'?0'}")//El ?0 marcador de posición le permite sustituir el valor de los argumentos del método en la cadena de consulta JSON.
     List<UsuarioModelo> BuscarPorApellido(String apellido);
+
+    
 }

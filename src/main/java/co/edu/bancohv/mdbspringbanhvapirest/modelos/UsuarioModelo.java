@@ -1,6 +1,7 @@
 package co.edu.bancohv.mdbspringbanhvapirest.modelos;
 
 import java.time.LocalDate;
+import java.util.List;
 
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
@@ -17,9 +18,14 @@ public class UsuarioModelo {
     private String celular;
     private String clave;
     private DireccionModelo direccion;
-
+    private List<UsuarioAcademiaModelo> academia;
     
-
+    public List<UsuarioAcademiaModelo> getAcademia() {
+        return academia;
+    }
+    public void setAcademia(List<UsuarioAcademiaModelo> academia) {
+        this.academia = academia;
+    }
     public DireccionModelo getDireccion() {
         return direccion;
     }
@@ -77,23 +83,11 @@ public class UsuarioModelo {
     }
     public UsuarioModelo() {
     }
-    public UsuarioModelo(String id, String numerodocumento, String nombre, String apellido, LocalDate fechaRegistro,
-            String email, String celular, String clave, DireccionModelo direccion) {
+        
+    public UsuarioModelo(String id, List<UsuarioAcademiaModelo> academia) {
         this.id = id;
-        this.numerodocumento = numerodocumento;
-        this.nombre = nombre;
-        this.apellido = apellido;
-        this.fechaRegistro = fechaRegistro;
-        this.email = email;
-        this.celular = celular;
-        this.clave = clave;
-        this.direccion = direccion;
+        this.academia = academia;
     }
-    @Override
-    public String toString() {
-        return "UsuarioModelo [apellido=" + apellido + ", celular=" + celular + ", clave=" + clave + ", direccion="
-                + direccion + ", email=" + email + ", fechaRegistro=" + fechaRegistro + ", id=" + id + ", nombre="
-                + nombre + ", numerodocumento=" + numerodocumento + "]";
-    }
+    
 
 }
