@@ -6,8 +6,6 @@ import java.util.List;
 
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.mongodb.core.query.Query;
-import org.springframework.data.mongodb.core.query.Update;
 import org.springframework.stereotype.Service;
 
 import co.edu.bancohv.mdbspringbanhvapirest.modelos.UsuarioModelo;
@@ -39,11 +37,16 @@ public class UsuarioServicio {
     }
 
     public List<UsuarioModelo> obtenerClientePorNombre(String nombre){
-        return clienteRepository.findByNombre(nombre);
+        return clienteRepository.findByNombre(nombre.toLowerCase());
     }
     
     public List<UsuarioModelo> obtenerPorApellido(String apellido){
-        return clienteRepository.BuscarPorApellido(apellido);
+        return clienteRepository.BuscarPorApellido(apellido.toLowerCase());
+    }
+
+    public List<UsuarioModelo> login(String correo, String clave){
+
+        return clienteRepository.usuarioPorCorreoClave(correo, clave);
     }
     
 }
